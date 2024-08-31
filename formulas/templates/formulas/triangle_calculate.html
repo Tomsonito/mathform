@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculate Triangle Properties</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles/formulas.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="all">
+            <div class="navbar">
+                <div class="logo">MATHFORM</div>
+                <ul class="links">
+                    <li> <a href="{% url 'home' %}">All formulas</a></li>
+                    <li> <a href="{% url 'about' %}">About</a></li>
+                    <li> <a href="{% url 'links'%}">links</a></li>
+                </ul>
+            </div>
+        </header>
+    <div class="description">
+        <h1 class="title" style="--clr:#5b98eb;;color: var(--clr);">Description of a triangle</h1>
+        <p  class="text" style="font-size: 24px; color:white;margin-top: 10px; margin-bottom:0">
+        A triangle is a geometric figure that is a polygon with three sides and three angles. The sum of the interior
+        angles of a triangle always equals 180 degrees. Triangles are classified based on their side lengths and angles:
+        </p>
+        <ul class="triangle_forms" style="color:white; font-size: 18px; margin-top:10px;">
+            <li>Equilateral Triangle</li>
+            <li>Isosceles Triangle</li>
+            <li>Scalene Triangle</li>
+            <li>Right Triangle</li>
+            <li>Acute Triangle</li>
+            <li>Obtuse Triangle</li>
+        </ul>
+        <hr>
+        <form method="post">
+            {% csrf_token %}
+<!--Equilateral triangle-->
+            <h1 class="title" style="--clr:#5b98eb; color: var(--clr);">Equilateral triangle</h1>
+            <div class="content-wrapper">
+                <div class="display">
+                    <p class='text_square'>An equilateral triangle is a special type
+                        of triangle where all three sides are of equal length, and all three interior angles are equal,
+                        each measuring 60 degrees. Because of its symmetrical properties, the equilateral triangle is
+                        considered one of the most basic and significant types of triangles in geometry.</p>
+                        <hr style="--clr:#5b98eb; border-color: var(--clr);">
+                        <p class='text_square'>The area of an equilateral triangle can be calculated using the formula:
+                        <br>
+                            <span class="triangle" style="--clr:#5b98eb;">Area</span> = &#8730;3/4 * length<sup>2</sup> </p>
+                <hr width="100%" style="--clr:#5b98eb; border-color: var(--clr);">
+                    <p class='text_square' style="color:white; font-size: 24px;">
+                        The perimeter P of an equilateral triangle is simply the sum of all its sides,
+                        which can be calculated as:
+                        <br>
+                        <span class="triangle" style="--clr:#5b98eb;">Perimeter</span> = 3 * length
+                    </p>
+                </div>
+            <div class="container">
+                <div class="box" style="--clr:#5b98eb;">
+                <div class="answer">
+                    <label class="enter" for="first_side_e">Side Length:</label>
+                    <input type="number" id="first_side_e" name="first_side_e" value="{{first_side_e}}" min='0' required>
+                        {% if action == 'calculate_equilateral_triangle' and result_perimeter is not None and result_area is not None %}
+                        <p>Perimeter: {{ result_perimeter }}</p>
+                        <p>Area: {{ result_area|floatformat:1 }}</p>
+                        {% endif %}
+                </div>
+                    <button class="button_square" type="submit" name="action" value="calculate_equilateral_triangle"> answer </button>
+                </div>
+                </div>
+                </div>
+            <hr>
+<!--calculate_isosceles_triangle-->
+       <h1 class="title" style="--clr:#5b98eb; color: var(--clr);">Isosceles triangle</h1>
+            <div class="content-wrapper">
+                <div class="display">
+                    <p class='text_square' style="color:white; font-size: 24px;">An isosceles triangle is a type of
+                        triangle that has two sides of equal length. The angles opposite these equal sides are also equal.
+                        This symmetry gives the isosceles triangle some unique properties and makes it a fundamental
+                        shape in geometry.
+                        <br>
+                        <span class="triangle" style="--clr:#5b98eb;">a = side</span>
+                        <br>
+                        <span class="triangle" style="--clr:#5b98eb;">b = base</span>
+                    </p>
+                <hr class="formula_hr" style="--clr:#5b98eb;">
+                        <p class="text_square">
+                        The area A of an isosceles triangle can be calculated using the following formula,
+                        where a is the length of the two equal sides, and b is the base:
+                        <br>
+                        <span class="triangle" style="--clr:#5b98eb;">Area</span> = 0.5 * b * &#8730;(a<sup>2</sup>-(b/2)<sup>2</sup>)</p>
+                <hr width="100%" style="--clr:#5b98eb; border-color: var(--clr);">
+                    <p class='text_square' style="color:white; font-size: 24px;">
+                        The area A of an isosceles triangle can be calculated using the following formula,
+                        where a is the length of the two equal sides, and b is the base:
+                        <br>
+                        <span class="triangle" style="--clr:#5b98eb;">Perimeter</span> = 2a + b
+                    </p>
+                </div>
+            <div class="container">
+        <div class="box" style="--clr:#5b98eb;">
+            <div class="answer">
+            <label class="enter"  for="first_isosceles_triangle">Side(a):</label>
+            <input type="number" id="first_isosceles_triangle" name="first_side_i" value="{{first_side_i}}" min='0' required>
+            <label class="enter"  for="second_isosceles_triangle">Base(b):</label>
+            <input type="number" id="second_isosceles_triangle" name="second_side_i" value="{{second_side_i}}" min='0' required>
+            {% if action == 'calculate_isosceles_triangle' and result_perimeter is not None and result_area is not None %}
+                <p>Perimeter: {{ result_perimeter }}</p>
+                <p>Area: {{ result_area|floatformat:1 }}</p>
+            {% endif %}
+            </div>
+            <button class="button_square" type="submit" name="action" value="calculate_isosceles_triangle"> answer </button>
+        </div>
+        </div>
+        </div>
+            <hr>
+<!--calculate_scalene_triangle-->
+        <h1 class="title" style="--clr:#5b98eb; color: var(--clr);">Scalene triangle</h1>
+            <div class="content-wrapper">
+                <div class="display">
+                    <p class='text_square' style="color:white; font-size: 24px;">A scalene triangle is a type of
+                        triangle where all three sides have different lengths, and all three interior angles are also
+                        different. Unlike equilateral or isosceles triangles, scalene triangles have no equal sides or
+                        angles. This lack of symmetry makes scalene triangles one of the most general forms of triangles
+                        in geometry.
+                        <br>
+                        <span class="triangle" style="--clr:#5b98eb;">a = First side</span>
+                        <br>
+                        <span class="triangle" style="--clr:#5b98eb;">b = Second side</span>
+                        <br>
+                        <span class="triangle" style="--clr:#5b98eb;">c = Third side</span>
+                        <br>
+                        <span class="triangle" style="--clr:#5b98eb;">s = the semi-perimeter</span>
+                    </p>
+                <hr class="formula_hr" style="--clr:#5b98eb;">
+                        <p class="text_square">
+                        The perimeter
+                            P of a scalene triangle is the sum of the lengths of all its sides. If the sides of the
+                            triangle are a, b, and c, then the perimeter is calculated using the formula:
+                        <br>
+                        <span class="triangle" style="--clr:#5b98eb;">Perimeter</span> = a + b + c</p>
+                <hr width="100%" style="--clr:#5b98eb; border-color: var(--clr);">
+                    <p class='text_square' style="color:white; font-size: 24px;">
+                        The area is calculated using the following formula:
+                        <br>
+                        <span class="triangle" style="--clr:#5b98eb;">Area</span> = &#8730;(s * (s-a) * (s-b) * (s-c))
+                    </p>
+                </div>
+            <div class="container">
+        <div class="box" style="--clr:#5b98eb">
+            <div>
+                <label class="enter" for="first_scalene_triangle">First side:</label>
+                <input type="number" id="first_scalene_triangle" name="first_side_s" value="{{first_side_s}}" min='0' required>
+                <label class="enter" for="second_scalene_triangle">Second side:</label>
+                <input type="number" id="second_scalene_triangle" name="second_side_s" value="{{second_side_s}}" min='0' required>
+                <label class="enter" for="third_scalene_triangle">Third side:</label>
+                <input type="number" id="third_scalene_triangle" name="third_side_s" value="{{third_side_s}}" min='0' required>
+                {% if action == 'calculate_scalene_triangle' and result_perimeter is not None and result_area is not None %}
+                    <p>Perimeter: {{ result_perimeter }}</p>
+                    <p>Area: {{ result_area|floatformat:1 }}</p>
+                {% endif %}
+            </div>
+            <button class="button_square" type="submit" name="action" value="calculate_scalene_triangle"> answer </button>
+        </div>
+        </div>
+        </div>
+            <hr>
+<!--calculate_right_triangle-->
+        <h1 class="title" style="--clr:#5b98eb; color: var(--clr);">Right triangle</h1>
+            <div class="content-wrapper">
+                <div class="display">
+                    <p class='text_square' style="color:white; font-size: 24px;">A right triangle is a type of triangle
+                        where one of the angles is exactly 90 degrees. The side opposite the right angle is called the
+                        hypotenuse, while the other two sides are known as the legs. The hypotenuse is always
+                        the longest side in a right triangle
+                        <br>
+                        <span class="triangle" style="--clr:#5b98eb;">a = First side</span>
+                        <br>
+                        <span class="triangle" style="--clr:#5b98eb;">b = Second side</span>
+                        <br>
+                        <span class="triangle" style="--clr:#5b98eb;">c = hypotenuse</span>
+                    </p>
+                <hr class="formula_hr" style="--clr:#5b98eb;">
+                        <p class="text_square">
+                        The formula will automatically find the hypotenuse.
+                            <br>
+                        The formula for the perimeter is:
+                        <br>
+                        <span class="triangle" style="--clr:#5b98eb;">Perimeter</span> = a + b + c</p>
+                <hr width="100%" style="--clr:#5b98eb; border-color: var(--clr);">
+                    <p class='text_square' style="color:white; font-size: 24px;">
+                        To find the area of a right triangle, you use the lengths of the two legs.
+                        The formula for the area is:
+                        <br>
+                        <span class="triangle" style="--clr:#5b98eb;">Area</span> = 0.5 * a * b
+                    </p>
+                </div>
+            <div class="container">
+        <div class="box" style="--clr:#5b98eb">
+            <div>
+                <label class="enter" for="first_isosceles_triangle">first side:</label>
+                <input type="number" id="first_right_triangle" name="first_side_r" value="{{first_side_r}}" min='0' required>
+                <label class="enter" for="first_right_triangle">second side:</label>
+                <input type="number" id="second_right_triangle" name="second_side_r" value="{{second_side_r}}" min='0' required>
+                {% if action == 'calculate_right_triangle' and result_perimeter is not None and result_area is not None %}
+                    <p>Perimeter: {{ result_perimeter|floatformat:1 }}</p>
+                    <p>Area: {{ result_area|floatformat:1 }}</p>
+                {% endif %}
+            </div>
+            <button type="submit" name="action" value="calculate_right_triangle"> answer </button>
+        </div>
+        </div>
+        </div>
+        </form>
+    </div>
+</body>
+</html>

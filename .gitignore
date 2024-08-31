@@ -1,0 +1,43 @@
+# Python
+*.py[cod]
+__pycache__/
+*.so
+
+# Django
+*.log
+*.pot
+*.pyc
+*.pyo
+*.swp
+*~
+db.sqlite3
+/staticfiles/
+
+# If using staticfiles
+/static/
+
+# Virtualenv
+.venv/
+venv/
+ENV/
+env/
+env.bak/
+venv.bak/
+
+# PyCharm
+.idea/
+.vscode/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+*.log
+
+# IDE Specific
+*.sublime-workspace
+*.sublime-project
+
+# Environment variables
+.env
+.env.*

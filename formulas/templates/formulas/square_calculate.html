@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Mathform</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'styles/formulas.css' %}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <header class="all">
+            <div class="navbar">
+                <div class="logo" style="font-size: 3em;">MATHFORM</div>
+                <ul class="links">
+                    <li> <a href="{% url 'home' %}">All formulas</a></li>
+                    <li> <a href="{% url 'about' %}">About</a></li>
+                    <li> <a href="{% url 'links'%}">links</a></li>
+                </ul>
+            </div>
+        </header>
+<div class="description" >
+    <h1 style="--clr:#eb5ae5;color: var(--clr);">Description of a Square</h1>
+    <p  class="text" style="font-size: 24px; color:white;">
+        A square is a geometric figure that is a special type of quadrilateral. It has four equal sides and four
+        right angles (each measuring 90 degrees). Because of these properties, a square is both a rectangle
+        (a quadrilateral with four right angles) and a rhombus (a quadrilateral with four equal sides).
+        The diagonals of a square are equal in length and bisect each other at right angles.
+    </p>
+    <hr>
+    <h1 class="title" style="--clr:#eb5ae5;color: var(--clr);">Area of the square</h1>
+    <div class="content-wrapper">
+        <p class='text_square' style="color:white; font-size: 24px;">The area of a square is calculated by squaring the length of one
+            of its sides.<br>
+            The formula for the area is: Side*Side or A*A
+        </p>
+        <div class="container">
+            <form method="post">
+                {% csrf_token %}
+                <div class="box" style="--clr:#eb5ae5;">
+                    <label style='font-size:20px;' for="side_length">Length:</label>
+                    <input type="number" id="side_length" name="side_length" value="{% if side_length %}{{ side_length }}{% else %}0{% endif %}" min="0" required>
+                    <button class='button_square' type="submit" name="action" value="area">Calculate Area</button>
+                    <div class="result">
+                        {% if action == 'area' and result %}
+                            <p>Area: {{ result }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <hr>
+    <h1 class="title" style="--clr:#eb5ae5;color: var(--clr);">Perimeter of the square</h1>
+    <div class="content-wrapper">
+        <p class='text_square' style="color:white; font-size: 24px;">The perimeter of a square is calculated by
+        multiplying the length of one side by 4.<br>
+        The formula for the perimeter is: 4*side or 4*A
+        </p>
+        <div class="container">
+            <form method="post">
+                {% csrf_token %}
+                <div class="box" style="--clr:#eb5ae5;">
+                <label style='font-size:20px;' for="length">Length:</label>
+                <input type="number" id="length" name="length" value="{% if length %}{{ length }}{% else %}0{% endif %}" min="0" required>
+                <button class='button_square' type="submit" name="action" value="perimeter">Calculate Perimeter</button>
+                <div class="result">
+                    {% if action == 'perimeter' and result %}
+                        <p>Perimeter: {{ result }}</p>
+                    {% endif %}
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    </div>
+    </body>
+    </html>

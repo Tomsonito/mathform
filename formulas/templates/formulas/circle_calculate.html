@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculate Circle Properties</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles/formulas.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="all">
+            <div class="navbar">
+                <div class="logo" style="font-size: 3em;">MATHFORM</div>
+                <ul class="links">
+                    <li> <a href="{% url 'home' %}">All formulas</a></li>
+                    <li> <a href="{% url 'about' %}">About</a></li>
+                    <li> <a href="{% url 'links'%}">links</a></li>
+                </ul>
+            </div>
+        </header>
+    <div class="description">
+    <h1 style="--clr:#89ec6b; color: var(--clr); margin:5px 0">Description of a circle</h1>
+    <p  class="text" style="font-size: 24px; color:white;margin:10px 0">
+        A circle is a shape in which all points are equidistant from a fixed central point called the center. The
+        distance from the center to any point on the circle is called the radius. The distance across the circle through
+        the center is called the diameter, which is twice the length of the radius.</p>
+        <hr>
+        <h1 style="--clr:#89ec6b; color: var(--clr);margin:5px 0">Designations</h1>
+        <ul class="triangle_forms" style="color:white; font-size: 18px; margin: 5px 0;">
+            <li><span class="triangle" style="--clr:#89ec6b;">&pi;</span> = irrational constant</li>
+            <li><span class="triangle" style="--clr:#89ec6b;">r</span> = radius</li>
+        </ul>
+        <hr>
+        <div class="content-wrapper">
+            <div class="display">
+                <h1 style="--clr:#89ec6b; color: var(--clr); margin:5px 0;">Area</h1>
+                <p class='text_square'>The area A of a circle is the space contained within its boundary.
+                    <br>
+                    <span class="triangle" style="--clr:#89ec6b;">Area</span> = &pi; * r<sup>2</sup></p>
+                <hr width="100%" style="--clr:#89ec6b; border-color: var(--clr);">
+                <h1 style="--clr:#89ec6b; color: var(--clr); margin:5px 0;">Perimeter</h1>
+                <p class='text_square' style="color:white; font-size: 24px;">
+                    The perimeter C of a circle, also known as the circumference, is the distance around the circle.
+                    <br>
+                    <span class="triangle" style="--clr:#89ec6b;">Perimeter</span> = 2&pi; * r
+                </p>
+            </div>
+    <div class="container">
+        <form method="post">
+            {% csrf_token %}
+            <div class="box" style="--clr:#eb5ae5;">
+                <label class="enter" for="radius">Radius:</label>
+                <input type="text" id="radius" name="radius" value="{{ radius }}" required>
+                <button class="button_square" type="submit">Calculate</button>
+                <div class="answer">
+                   {% if error_message %}
+                        <p style="color: red;">{{ error_message }}</p>
+                    {% elif circumference is not None and area is not None %}
+                        <p>Circumference: {{ circumference|floatformat:1 }}</p>
+                        <p>Area: {{ area|floatformat:1 }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </form>
+    </div>
+    </div>
+    </div>
+</body>
+</html>
