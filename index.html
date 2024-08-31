@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Mathform</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'styles/main.css' %}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <header class="all">
+            <div class="navbar">
+                <div class="logo">MATHFORM</div>
+                <ul class="links">
+                    <li> <a href="{% url 'home' %}">All formulas</a></li>
+                    <li> <a href="{% url 'about' %}">About</a></li>
+                    <li> <a href="{% url 'links'%}">links</a></li>
+                </ul>
+            </div>
+        </header>
+        {% block content %}
+        <div class="container">
+            {% for formula in formulas %}
+            <div class="box" style="{{formula.style}}">
+                <div class=content>
+                    <div class="icon"><ion-icon name="{{formula.icon_name}}"></ion-icon></div>
+                    <div class="text">
+                        <h3>{{formula.name}}</h3>
+                        <p>{{formula.description}}
+                        </p>
+                        {% if formula.link == 'square' %}
+                            <a href="{% url 'square' %}">Read more</a>
+                        {% elif formula.link == 'triangle' %}
+                            <a href="{% url 'triangle' %}">Read more</a>
+                        {% elif formula.link == 'circle' %}
+                            <a href="{% url 'circle' %}">Read more</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    {% endblock content %}
+    </body>
+</html>
